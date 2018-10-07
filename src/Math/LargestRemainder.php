@@ -25,7 +25,7 @@ class LargestRemainder
     /**
      * @param int $precision
      */
-    public function setPrecision(int $precision)
+    public function setPrecision(int $precision): void
     {
         $this->precision = $precision;
     }

@@ -42,7 +42,7 @@ If you are not familiar with composer:
 [composer basic usage](https://getcomposer.org/doc/01-basic-usage.md)
 
 ### Requirements
-- PHP >= 7.0
+- PHP >= 7.1
 
 ## Basic Usage
 

@@ -9,7 +9,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldRoundIfUnder100()
+    public function shouldRoundIfUnder100(): void
     {
         $numbers = [18, 12, 24, 15, 30];
 
@@ -21,7 +21,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldRoundIfOver100()
+    public function shouldRoundIfOver100(): void
     {
         $numbers = [20, 12, 24, 15, 30];
 
@@ -33,7 +33,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldWorkWithPrecision()
+    public function shouldWorkWithPrecision(): void
     {
         $numbers = [
             18.562874251497007,
@@ -60,7 +60,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldRoundWithPrecision2IfUnder100()
+    public function shouldRoundWithPrecision2IfUnder100(): void
     {
         $numbers = [0.18, 0.12, 0.24, 0.15, 0.30];
 
@@ -73,7 +73,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldKeepWhenIs100Already()
+    public function shouldKeepWhenIs100Already(): void
     {
         $numbers = [0.19, 0.12, 0.24, 0.15, 0.30];
 
@@ -86,7 +86,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldRoundWithPrecision2IfOver100()
+    public function shouldRoundWithPrecision2IfOver100(): void
     {
         $numbers = [0.20, 0.12, 0.24, 0.15, 0.30];
 
@@ -99,7 +99,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldRoundEvenIfDifferenceIsVeryLowAndInternalSortingChangesKeys()
+    public function shouldRoundEvenIfDifferenceIsVeryLowAndInternalSortingChangesKeys(): void
     {
         $numbers = [0.5, 0.22727272727273, 0.18181818181818, 0.090909090909091];
 
@@ -112,7 +112,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldRoundCallback()
+    public function shouldRoundCallback(): void
     {
         $objects = [['a' => 0.20], ['a' => 0.12], ['a' => 0.24], ['a' => 0.15], ['a' => 0.30]];
 
@@ -137,7 +137,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function doNotTouchOriginalValues()
+    public function doNotTouchOriginalValues(): void
     {
         $numbers = [0.5, 0.22727272727273, 0.18181818181818, 0.090909090909091];
 
@@ -151,7 +151,7 @@ class LargestRemainderTest extends TestCase
     /**
      * @test
      */
-    public function shouldKeepOriginalSorting()
+    public function shouldKeepOriginalSorting(): void
     {
         $numbers = [
             18.562874251497007,
