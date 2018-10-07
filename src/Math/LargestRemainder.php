@@ -52,6 +52,8 @@ class LargestRemainder
      */
     public function uround(callable $get, callable $set): array
     {
+        $originalOrder = array_keys($this->numbers);
+
         $sum = array_sum(array_map(function ($item) use ($get) {
             return floor(call_user_func_array($get, [$item]) * $this->normalizer);
         }, $this->numbers));
@@ -83,6 +85,6 @@ class LargestRemainder
             continue;
         }
 
-        return $this->numbers;
+        return array_replace(array_flip($originalOrder), $this->numbers);
     }
 }

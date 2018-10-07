@@ -120,4 +120,30 @@ class LargestRemainderTest extends TestCase
 
         $this->assertSame([0.5, 0.22727272727273, 0.18181818181818, 0.090909090909091], $numbers);
     }
+
+    /**
+     * @test
+     */
+    public function shouldKeepOriginalSorting()
+    {
+        $numbers = [
+            18.562874251497007,
+            20.958083832335326,
+            18.562874251497007,
+            19.161676646706585,
+            22.75449101796407
+        ];
+
+        $lr = new LargestRemainder($numbers);
+
+        $actual = $lr->round();
+
+        $this->assertEquals([
+            19.0,
+            21.0,
+            18.0,
+            19.0,
+            23.0
+        ], $actual);
+    }
 }
