@@ -104,6 +104,9 @@ Mostly, you won´t have the numbers you want to apply this algorithm on in a sim
 That´s why this library also supports callbacks for applying this algorithm.
 
 You just have to supply 2 callbacks to the `usort` method. The first one, to fetch the relevant number from the object. And the second one to write the rounded number back to the object.
+
+> Make sure to pass the first argument of the setter callback as reference, eg. as in the example below: `&$item`. If not, the resulting data will maintain their original numbers and are not rounded.
+
 ```php
 $objects = [
     ['a' => 18.562874251497007],
@@ -125,6 +128,7 @@ print_r($lr->uround(
     }
 ));
 ```
+
 which results in:
 ```
 Array
