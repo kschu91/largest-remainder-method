@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/kschu91/largest-remainder-method.svg?branch=master)](https://travis-ci.org/kschu91/largest-remainder-method)
+[![Code Coverage](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/?branch=master)
+
 # largest remainder method algorithm
 
 A PHP implementation of the [largest remainder method](https://en.wikipedia.org/wiki/Largest_remainder_method) algorithm. This method is the most common way to get rid of rounding issues when working with rounded percentage values.
