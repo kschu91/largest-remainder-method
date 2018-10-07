@@ -2,6 +2,11 @@
 
 namespace Aeq\LargestRemainder\Math;
 
+use Aeq\LargestRemainder\Exception\AlreadyNormalizedException;
+use Aeq\LargestRemainder\Exception\NotANumberException;
+use Aeq\LargestRemainder\Exception\NotYetNormalizedException;
+use Aeq\LargestRemainder\Math\Number as LargestRemainderNumber;
+
 class LargestRemainder
 {
     /**
@@ -32,6 +37,9 @@ class LargestRemainder
 
     /**
      * @return array
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function round(): array
     {
@@ -49,38 +57,40 @@ class LargestRemainder
      * @param callable $get
      * @param callable $set
      * @return array
+     * @throws NotANumberException
+     * @throws AlreadyNormalizedException
+     * @throws NotYetNormalizedException
      */
     public function uround(callable $get, callable $set): array
     {
         $originalOrder = array_keys($this->numbers);
 
         $sum = array_sum(array_map(function ($item) use ($get) {
-            return floor($this->normalize(call_user_func_array($get, [$item])));
+            return $this->getNumber($get, $item)->floor()->value();
         }, $this->numbers));
 
         $diff = 100 - $sum;
 
         uasort($this->numbers, function ($a, $b) use ($get) {
-            $aNumber = $this->normalize(call_user_func_array($get, [$a]));
-            $bNumber = $this->normalize(call_user_func_array($get, [$b]));
-            return $aNumber - floor($aNumber) < $bNumber - floor($bNumber);
+            $aNumber = $this->getNumber($get, $a);
+            $bNumber = $this->getNumber($get, $b);
+            return $aNumber->value() - $aNumber->floor()->value() < $bNumber->value() - $bNumber->floor()->value();
         });
 
         $index = 0;
         foreach ($this->numbers as &$item) {
-            $number = call_user_func_array($get, [&$item]);
-            $normalized = $this->normalize($number);
+            $number = $this->getNumber($get, $item);
             if ($index < $diff) {
-                call_user_func_array($set, [&$item, $this->denormalize(floor($normalized + 1))]);
+                $this->setNumber($set, $item, $number->add(1)->floor());
                 $index++;
                 continue;
             }
             if ($diff < 0 && $index < $diff * (-1)) {
-                call_user_func_array($set, [&$item, $this->denormalize(floor($normalized - 1))]);
+                $this->setNumber($set, $item, $number->sub(1)->floor());
                 $index++;
                 continue;
             }
-            call_user_func_array($set, [&$item, $this->denormalize(floor($normalized))]);
+            $this->setNumber($set, $item, $number->floor());
             $index++;
             continue;
         }
@@ -89,20 +99,29 @@ class LargestRemainder
     }
 
     /**
+     * @param callable $get
      * @param $val
-     * @return float
+     * @return LargestRemainderNumber
+     * @throws NotANumberException
+     * @throws AlreadyNormalizedException
      */
-    private function normalize($val): float
+    private function getNumber(callable $get, $val): LargestRemainderNumber
     {
-        return $val * pow(10, $this->precision);
+        $resolved = call_user_func_array($get, [$val]);
+        if (false === is_numeric($resolved)) {
+            throw new NotANumberException($val, 1538927918);
+        }
+        return (new Number($resolved, $this->precision))->normalize();
     }
 
     /**
-     * @param $val
-     * @return float
+     * @param callable $set
+     * @param $item
+     * @param LargestRemainderNumber $number
+     * @throws NotYetNormalizedException
      */
-    private function denormalize($val): float
+    private function setNumber(callable $set, &$item, LargestRemainderNumber $number): void
     {
-        return $val / pow(10, $this->precision);
+        call_user_func_array($set, [&$item, $number->denormalize()->value()]);
     }
 }

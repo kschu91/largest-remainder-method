@@ -2,12 +2,18 @@
 
 namespace Aeq\LargestRemainder\Math;
 
+use Aeq\LargestRemainder\Exception\AlreadyNormalizedException;
+use Aeq\LargestRemainder\Exception\NotANumberException;
+use Aeq\LargestRemainder\Exception\NotYetNormalizedException;
 use PHPUnit\Framework\TestCase;
 
 class LargestRemainderTest extends TestCase
 {
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldRoundIfUnder100(): void
     {
@@ -20,6 +26,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldRoundIfOver100(): void
     {
@@ -32,6 +41,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldWorkWithPrecision(): void
     {
@@ -59,6 +71,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldRoundWithPrecision2IfUnder100(): void
     {
@@ -72,6 +87,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldKeepWhenIs100Already(): void
     {
@@ -85,6 +103,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldRoundWithPrecision2IfOver100(): void
     {
@@ -98,6 +119,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldRoundEvenIfDifferenceIsVeryLowAndInternalSortingChangesKeys(): void
     {
@@ -111,6 +135,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldRoundCallback(): void
     {
@@ -136,6 +163,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function doNotTouchOriginalValues(): void
     {
@@ -150,6 +180,9 @@ class LargestRemainderTest extends TestCase
 
     /**
      * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
      */
     public function shouldKeepOriginalSorting(): void
     {
@@ -172,5 +205,27 @@ class LargestRemainderTest extends TestCase
             19.0,
             23.0
         ], $actual);
+    }
+
+    /**
+     * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
+     */
+    public function shouldThrowNotANumberException(): void
+    {
+        $this->expectException(NotANumberException::class);
+        $numbers = [
+            18.562874251497007,
+            20.958083832335326,
+            'this is not a number',
+            19.161676646706585,
+            22.75449101796407
+        ];
+
+        $lr = new LargestRemainder($numbers);
+
+        $lr->round();
     }
 }
