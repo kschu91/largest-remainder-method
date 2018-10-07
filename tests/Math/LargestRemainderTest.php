@@ -13,9 +13,9 @@ class LargestRemainderTest extends TestCase
     {
         $numbers = [18, 12, 24, 15, 30];
 
-        $lrr = new LargestRemainder($numbers);
+        $lr = new LargestRemainder($numbers);
 
-        $this->assertEquals(100, array_sum($lrr->round()));
+        $this->assertEquals(100, array_sum($lr->round()));
     }
 
     /**
@@ -25,22 +25,49 @@ class LargestRemainderTest extends TestCase
     {
         $numbers = [20, 12, 24, 15, 30];
 
-        $lrr = new LargestRemainder($numbers);
+        $lr = new LargestRemainder($numbers);
 
-        $this->assertEquals(100, array_sum($lrr->round()));
+        $this->assertEquals(100, array_sum($lr->round()));
     }
 
     /**
      * @test
      */
-    public function shouldRoundWithNormalizerIfUnder100()
+    public function shouldWorkWithPrecision()
+    {
+        $numbers = [
+            18.562874251497007,
+            20.958083832335326,
+            18.562874251497007,
+            19.161676646706585,
+            22.75449101796407
+        ];
+
+        $lr = new LargestRemainder($numbers);
+        $lr->setPrecision(2);
+
+        $actual = $lr->round();
+
+        $this->assertEquals([
+            18.55,
+            20.94,
+            18.55,
+            19.15,
+            22.74
+        ], $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldRoundWithPrecision2IfUnder100()
     {
         $numbers = [0.18, 0.12, 0.24, 0.15, 0.30];
 
-        $lrr = new LargestRemainder($numbers);
-        $lrr->setNormalizer(100);
+        $lr = new LargestRemainder($numbers);
+        $lr->setPrecision(2);
 
-        $this->assertEquals(1, array_sum($lrr->round()));
+        $this->assertEquals(1, array_sum($lr->round()));
     }
 
     /**
@@ -50,23 +77,23 @@ class LargestRemainderTest extends TestCase
     {
         $numbers = [0.19, 0.12, 0.24, 0.15, 0.30];
 
-        $lrr = new LargestRemainder($numbers);
-        $lrr->setNormalizer(100);
+        $lr = new LargestRemainder($numbers);
+        $lr->setPrecision(2);
 
-        $this->assertEquals(1, array_sum($lrr->round()));
+        $this->assertEquals(1, array_sum($lr->round()));
     }
 
     /**
      * @test
      */
-    public function shouldRoundWithNormalizerIfOver100()
+    public function shouldRoundWithPrecision2IfOver100()
     {
         $numbers = [0.20, 0.12, 0.24, 0.15, 0.30];
 
-        $lrr = new LargestRemainder($numbers);
-        $lrr->setNormalizer(100);
+        $lr = new LargestRemainder($numbers);
+        $lr->setPrecision(2);
 
-        $this->assertEquals(1, array_sum($lrr->round()));
+        $this->assertEquals(1, array_sum($lr->round()));
     }
 
     /**
@@ -76,10 +103,10 @@ class LargestRemainderTest extends TestCase
     {
         $numbers = [0.5, 0.22727272727273, 0.18181818181818, 0.090909090909091];
 
-        $lrr = new LargestRemainder($numbers);
-        $lrr->setNormalizer(100);
+        $lr = new LargestRemainder($numbers);
+        $lr->setPrecision(2);
 
-        $this->assertEquals(1, array_sum($lrr->round()));
+        $this->assertEquals(1, array_sum($lr->round()));
     }
 
     /**
@@ -89,12 +116,12 @@ class LargestRemainderTest extends TestCase
     {
         $objects = [['a' => 0.20], ['a' => 0.12], ['a' => 0.24], ['a' => 0.15], ['a' => 0.30]];
 
-        $lrr = new LargestRemainder($objects);
-        $lrr->setNormalizer(100);
+        $lr = new LargestRemainder($objects);
+        $lr->setPrecision(2);
 
         $this->assertEquals(
             1,
-            array_reduce($lrr->uround(
+            array_reduce($lr->uround(
                 function ($item) {
                     return $item['a'];
                 },
@@ -114,9 +141,9 @@ class LargestRemainderTest extends TestCase
     {
         $numbers = [0.5, 0.22727272727273, 0.18181818181818, 0.090909090909091];
 
-        $lrr = new LargestRemainder($numbers);
+        $lr = new LargestRemainder($numbers);
 
-        $lrr->round();
+        $lr->round();
 
         $this->assertSame([0.5, 0.22727272727273, 0.18181818181818, 0.090909090909091], $numbers);
     }
