@@ -1,0 +1,34 @@
+{
+      "name": "kschu91/largest-remainder-method",
+    "type": "library",
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3"
+    },
+    "authors": [
+        {
+            "name": "Kevin Schu",
+            "email": "kevin.schu@aoe.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Aeq\\LargestRemainder\\": "src"
+        },
+        "classmap": [
+            "src"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aeq\\LargestRemainder\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        }
+    }
+}
