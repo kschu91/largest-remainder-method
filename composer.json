@@ -1,9 +1,9 @@
 {
   "name": "kschu91/largest-remainder-method",
-  "description": "",
+  "description": "A PHP implementation of the largest remainder method algorithm. This method is the most common way to get rid of rounding issues when working with rounded percentage values.",
   "type": "library",
   "require": {
-    "php": "^7.1"
+    "php": "^7.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.3"
@@ -17,10 +17,7 @@
   "autoload": {
     "psr-4": {
       "Aeq\\LargestRemainder\\": "src"
-    },
-    "classmap": [
-      "src"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {
