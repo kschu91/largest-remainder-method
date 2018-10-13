@@ -18,7 +18,7 @@ class Number
     private $precision = 0;
 
     /**
-     * @var float
+     * @var bool
      */
     private $isNormalized = false;
 
@@ -61,20 +61,20 @@ class Number
     }
 
     /**
-     * @param $val
+     * @param float $val
      * @return Number
      */
-    public function add($val): self
+    public function add(float $val): self
     {
         $this->number += $val;
         return $this;
     }
 
     /**
-     * @param $val
+     * @param float $val
      * @return Number
      */
-    public function sub($val): self
+    public function sub(float $val): self
     {
         $this->number -= $val;
         return $this;
