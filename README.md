@@ -100,10 +100,10 @@ Array
 ```
 
 ## Working with complex arrays/objects
-Mostly, you won´t have the numbers you want to apply this algorithm on in a simple key value paired arrays as in the examples above. You rather have them in objects or associative arrays.
+Mostly, you don´t have the numbers you want to apply this algorithm on in a simple array as in the examples above. You rather have them in objects or associative arrays.
 That´s why this library also supports callbacks for applying this algorithm.
 
-You just have to supply 2 callbacks to the `usort` method. The first one, to fetch the relevant number from the object. And the second one to write the rounded number back to the object.
+You just have to supply 2 callbacks to the `usort` method. The first one, to fetch the relevant number from the object. And the second one to write the rounded number back to the resulting object.
 
 > Make sure to pass the first argument of the setter callback as reference, eg. as in the example below: `&$item`. If not, the resulting data will maintain their original numbers and are not rounded.
 
