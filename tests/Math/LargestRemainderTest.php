@@ -60,13 +60,7 @@ class LargestRemainderTest extends TestCase
 
         $actual = $lr->round();
 
-        $this->assertEquals([
-            18.55,
-            20.94,
-            18.55,
-            19.15,
-            22.74
-        ], $actual);
+        $this->assertSame(array_sum($actual), 100.0);
     }
 
     /**

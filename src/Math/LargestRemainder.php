@@ -69,7 +69,7 @@ class LargestRemainder
             return $this->getNumber($get, $item)->floor()->value();
         }, $this->numbers));
 
-        $diff = 100 - $sum;
+        $diff = round($sum, -1) - $sum;
 
         uasort($this->numbers, function ($a, $b) use ($get) {
             $aNumber = $this->getNumber($get, $a);
