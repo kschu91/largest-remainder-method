@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/kschu91/largest-remainder-method.svg?branch=master)](https://travis-ci.org/kschu91/largest-remainder-method)
+[![Build Status](https://api.travis-ci.com/kschu91/largest-remainder-method.svg?branch=master&status=passed)](https://travis-ci.com/kschu91/largest-remainder-method)
 [![Code Coverage](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/?branch=master)
 
