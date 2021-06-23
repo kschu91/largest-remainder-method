@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kschu91/largest-remainder-method.svg?branch=master)](https://travis-ci.org/kschu91/largest-remainder-method)
+[![Build Status](https://travis-ci.com/kschu91/largest-remainder-method.svg?branch=master)](https://travis-ci.org/kschu91/largest-remainder-method)
 [![Code Coverage](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kschu91/largest-remainder-method/?branch=master)
 
@@ -8,7 +8,7 @@ A PHP implementation of the [largest remainder method](https://en.wikipedia.org/
 
 ## The problem
 
-Let´s use an example:
+Assume the following example:
 ```
 18.562874251497007%
 20.958083832335326%
@@ -28,9 +28,9 @@ When rounding the above percentages using PHP´s rounding functions, we get:
 
 Which in fact sums up to `101%` instead of `100%`. The largest remainder method solves this issue by doing the following steps:
 
-1. Rounding all values down to the nearest integer value;
-2. Determining the difference between the sum of the rounded values and total value;
-3. Distributing the difference between the rounded values in decreasing order of their decimal parts.
+1. Rounding all values down to the nearest integer value
+2. Determining the difference between the sum of the rounded values and total value
+3. Distributing the difference between the rounded values in decreasing order of their decimal parts
 
 ## Installation
 
