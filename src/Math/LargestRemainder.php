@@ -74,7 +74,15 @@ class LargestRemainder
         uasort($this->numbers, function ($a, $b) use ($get) {
             $aNumber = $this->getNumber($get, $a);
             $bNumber = $this->getNumber($get, $b);
-            return $aNumber->value() - $aNumber->floor()->value() < $bNumber->value() - $bNumber->floor()->value();
+            $aDiff = $aNumber->value() - $aNumber->floor()->value();
+            $bDiff = $bNumber->value() - $bNumber->floor()->value();
+            if($aDiff === $bDiff) {
+                return 0;
+            }
+            if ($aDiff > $bDiff) {
+                return -1;
+            }
+            return 1;
         });
 
         $index = 0;
