@@ -65,11 +65,16 @@ class LargestRemainder
     {
         $originalOrder = array_keys($this->numbers);
 
-        $sum = array_sum(array_map(function ($item) use ($get) {
-            return $this->getNumber($get, $item)->floor()->value();
-        }, $this->numbers));
+        $sum = 0;
+        $floorSum = 0;
 
-        $diff = round($sum, -1) - $sum;
+        foreach ($this->numbers as $raw) {
+            $number = $this->getNumber($get, $raw);
+            $sum += $number->value();
+            $floorSum += $number->floor()->value();
+        }
+
+        $diff = round($sum) - round($floorSum);
 
         uasort($this->numbers, function ($a, $b) use ($get) {
             $aNumber = $this->getNumber($get, $a);
@@ -100,7 +105,6 @@ class LargestRemainder
             }
             $this->setNumber($set, $item, $number->floor());
             $index++;
-            continue;
         }
 
         return array_replace(array_flip($originalOrder), $this->numbers);

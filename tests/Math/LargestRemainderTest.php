@@ -15,28 +15,28 @@ class LargestRemainderTest extends TestCase
      * @throws NotANumberException
      * @throws NotYetNormalizedException
      */
-    public function shouldRoundIfUnder100(): void
+    public function shouldWorkWithoutPrecision(): void
     {
-        $numbers = [18, 12, 24, 15, 30];
+        $numbers = [
+            18.562874251497007,
+            20.958083832335326,
+            18.562874251497007,
+            19.161676646706585,
+            22.75449101796407
+        ];
 
         $lr = new LargestRemainder($numbers);
 
-        $this->assertEquals(100, array_sum($lr->round()));
-    }
+        $actual = $lr->round();
 
-    /**
-     * @test
-     * @throws AlreadyNormalizedException
-     * @throws NotANumberException
-     * @throws NotYetNormalizedException
-     */
-    public function shouldRoundIfOver100(): void
-    {
-        $numbers = [20, 12, 24, 15, 30];
-
-        $lr = new LargestRemainder($numbers);
-
-        $this->assertEquals(100, array_sum($lr->round()));
+        $this->assertSame(array_sum($actual), 100.0);
+        $this->assertSame([
+            19.0,
+            21.0,
+            18.0,
+            19.0,
+            23.0
+        ], $actual);
     }
 
     /**
@@ -61,54 +61,13 @@ class LargestRemainderTest extends TestCase
         $actual = $lr->round();
 
         $this->assertSame(array_sum($actual), 100.0);
-    }
-
-    /**
-     * @test
-     * @throws AlreadyNormalizedException
-     * @throws NotANumberException
-     * @throws NotYetNormalizedException
-     */
-    public function shouldRoundWithPrecision2IfUnder100(): void
-    {
-        $numbers = [0.18, 0.12, 0.24, 0.15, 0.30];
-
-        $lr = new LargestRemainder($numbers);
-        $lr->setPrecision(2);
-
-        $this->assertEquals(1, array_sum($lr->round()));
-    }
-
-    /**
-     * @test
-     * @throws AlreadyNormalizedException
-     * @throws NotANumberException
-     * @throws NotYetNormalizedException
-     */
-    public function shouldKeepWhenIs100Already(): void
-    {
-        $numbers = [0.19, 0.12, 0.24, 0.15, 0.30];
-
-        $lr = new LargestRemainder($numbers);
-        $lr->setPrecision(2);
-
-        $this->assertEquals(1, array_sum($lr->round()));
-    }
-
-    /**
-     * @test
-     * @throws AlreadyNormalizedException
-     * @throws NotANumberException
-     * @throws NotYetNormalizedException
-     */
-    public function shouldRoundWithPrecision2IfOver100(): void
-    {
-        $numbers = [0.20, 0.12, 0.24, 0.15, 0.30];
-
-        $lr = new LargestRemainder($numbers);
-        $lr->setPrecision(2);
-
-        $this->assertEquals(1, array_sum($lr->round()));
+        $this->assertSame([
+            18.56,
+            20.96,
+            18.56,
+            19.16,
+            22.76
+        ], $actual);
     }
 
     /**
@@ -124,7 +83,34 @@ class LargestRemainderTest extends TestCase
         $lr = new LargestRemainder($numbers);
         $lr->setPrecision(2);
 
-        $this->assertEquals(1, array_sum($lr->round()));
+        $actual = $lr->round();
+
+        $this->assertSame(1.0, array_sum($actual));
+        $this->assertSame([
+            0.5,
+            0.23,
+            0.18,
+            0.09
+        ], $actual);
+    }
+
+    /**
+     * @test
+     * @throws AlreadyNormalizedException
+     * @throws NotANumberException
+     * @throws NotYetNormalizedException
+     */
+    public function shouldRoundWithEqualValues(): void
+    {
+        $numbers = [0.015, 0.015];
+
+        $lr = new LargestRemainder($numbers);
+        $lr->setPrecision(2);
+
+        $actual = $lr->round();
+
+        $this->assertSame(0.03, array_sum($actual));
+        $this->assertSame([0.02, 0.01], $lr->round());
     }
 
     /**
@@ -135,24 +121,36 @@ class LargestRemainderTest extends TestCase
      */
     public function shouldRoundCallback(): void
     {
-        $objects = [['a' => 0.20], ['a' => 0.12], ['a' => 0.24], ['a' => 0.15], ['a' => 0.30]];
+        $objects = [
+            ['a' => 18.562874251497007],
+            ['a' => 20.958083832335326],
+            ['a' => 18.562874251497007],
+            ['a' => 19.161676646706585],
+            ['a' => 22.75449101796407]
+        ];
 
         $lr = new LargestRemainder($objects);
         $lr->setPrecision(2);
 
-        $this->assertEquals(
-            1,
-            array_reduce($lr->uround(
-                function ($item) {
-                    return $item['a'];
-                },
-                function (&$item, $value) {
-                    $item['a'] = $value;
-                }
-            ), function ($carry, $item) {
-                return $carry + $item['a'];
-            }, 0)
+        $actual = $lr->uround(
+            function ($item) {
+                return $item['a'];
+            },
+            function (&$item, $value) {
+                $item['a'] = $value;
+            }
         );
+
+        $this->assertSame(100.0, array_reduce($actual, function ($carry, $item) {
+            return $carry + $item['a'];
+        }, 0));
+        $this->assertSame([
+            ['a' => 18.56],
+            ['a' => 20.96],
+            ['a' => 18.56],
+            ['a' => 19.16],
+            ['a' => 22.76]
+        ], $actual);
     }
 
     /**
