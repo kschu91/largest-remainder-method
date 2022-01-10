@@ -1,4 +1,4 @@
-FROM php:8.0-cli
+FROM php:8.1-cli
 COPY . /usr/src/largest-remainder-method
 WORKDIR /usr/src/largest-remainder-method
 
