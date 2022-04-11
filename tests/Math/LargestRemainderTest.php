@@ -220,4 +220,24 @@ class LargestRemainderTest extends TestCase
 
         $lr->round();
     }
+
+  /**
+   * @test
+   * @throws AlreadyNormalizedException
+   * @throws NotANumberException
+   * @throws NotYetNormalizedException
+   */
+  public function shouldWorkWithTwoValues(): void
+  {
+    $numbers = [
+      88,
+      13
+    ];
+
+    $lr = new LargestRemainder($numbers);
+
+    $actual = $lr->round();
+
+    $this->assertSame([88.0, 12.0], $actual);
+  }
 }

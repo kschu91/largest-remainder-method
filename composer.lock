@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d9f59d586028a2a8f96cb81c87364ed",
-    "packages": [],
+    "content-hash": "edefab711411c4af1c56a97daff76712",
+    "packages": [
+        {
+            "name": "customergauge/remainder",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cgauge/php-largest-remainder-method.git",
+                "reference": "df25c03ae961fc6b5a21a8cbae39298d4da5f6b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cgauge/php-largest-remainder-method/zipball/df25c03ae961fc6b5a21a8cbae39298d4da5f6b4",
+                "reference": "df25c03ae961fc6b5a21a8cbae39298d4da5f6b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CustomerGauge\\Math\\Remainder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Deleu",
+                    "email": "deleugyn@gmail.com"
+                }
+            ],
+            "description": "Largest Remainder Method calculation",
+            "keywords": [
+                "Hamilton",
+                "Hare",
+                "Niemeyer",
+                "Vinton",
+                "largest",
+                "method",
+                "remainder"
+            ],
+            "time": "2020-12-11T12:09:23+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -2169,5 +2218,5 @@
         "php": ">=7.3"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "1.1.0"
 }

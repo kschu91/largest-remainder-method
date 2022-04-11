@@ -3,7 +3,8 @@
   "description": "A PHP implementation of the largest remainder method algorithm. This method is the most common way to get rid of rounding issues when working with rounded percentage values.",
   "type": "library",
   "require": {
-    "php": ">=7.3"
+    "php": ">=7.3",
+    "customergauge/remainder": "^1.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
@@ -24,6 +25,11 @@
     "psr-4": {
       "Aeq\\LargestRemainder\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
   },
   "config": {
     "preferred-install": {
