@@ -28,11 +28,16 @@ class LargestRemainder
     }
 
     /**
-     * @param int $precision
+     * Sets the rounding precision.
+     * 
+     * @param int $precision Precision to round the values to.
+     * @return static Support method chaining.
      */
-    public function setPrecision(int $precision): void
+    public function setPrecision(int $precision): static
     {
         $this->precision = $precision;
+
+        return $this;
     }
 
     /**
